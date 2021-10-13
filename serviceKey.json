@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "client-eco-shop",
+  "private_key_id": "85cb4d4b4d6e97da011c7c79dff69a27910fabe2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCyWgpG8Sjngykn\nRP9jhCYbCt9+u9L7oY3g2qA9sNf8LFAEEe4CoXCqKV67ywDadFJrVRd8sLiFDxfC\neTl/UR/6uZEvXyWP/S0LyLKS6X7NDBJBfjTB4iGMOvjsMEF8P0tdUxvwJpMDL/jw\nRd+9uZKGvP1VqEkUC+s4hLYfbBHUGUuF7Rffhfj5TDsmvQYHIUVG752GH3G3BULF\ndEDDVO62JA0RjxKOb39qAEg5ec9AH+lVtzt70UUq76Z32h1y3ey4LLJC2cbghrgj\nXdPiqO8nALBs0FpXryGJitDm8H4F8sFeFen66gAVyhZYtseN2tVCTIL1OfY3Szse\nvnumfpfzAgMBAAECggEADXjkttgnrVlIhgldu1Azqq5HFKUuekiJVZdeLFrL7eYR\nA0Wxc2xrfMcUO15JybaotSff1tDol1B9DHkowTfJESDsWSY4SainuvCloJhXtjh3\nto/If27L9vJLdFfu0mpbkIijHyBi0YZRqSC2FnhKm7fx8QL9xjBiS8omkbgRnrJM\nKA8kQ1Spv0XVz1Fxd6XHI2w+vmojr7v3ee1y8PPgSSBoiCBFd4L45TiwoCxuUg2i\n3fu1HTestkNWokIDJ05OrJYIYvY1RePLbmzi+4ZuESIn+CM21jHxAvzPspZi/0ql\nMc4CWT5DUDIn1/QU/dy/5cX7UHkSR0xP9p3LnRsvJQKBgQDc0HHkPKw/09+LYshI\nuaoxBJd4djHM0x9ItUFGwQih4DknDzB7YwM77S6tX+tXT0330aDRM0gn8eMvE9fu\nQQgpmpl26mtl4Yrp4UtCIc03TEhK74qORNLjK3iWzkIy5GHVB2WR76XKhmWiEvRR\n/fjiK7xRI0ET1g/KQVwiw1umPwKBgQDOxXHgfBigdQFGzuFH8Ajq+46C4qJ5vj5/\nLOCUlMF3k010CMq9wgl/pPf7qWJH7U5QlQuTlEdXF3wrZRzfTyHBADfH2NpXX18G\nOZNI/8vWfYy4a41DsCdYM4V7uV8Q/2cqoNVPXoRUQNfzZpMeqbnind+ye1xQOQV9\n5l5hHVKpTQKBgQDclBEheQZsYD8P4ybFl0qO2tJg0FkhDclTfVTu1AfGhNEy1naM\n2zSw2VbmdEoIlr0BENRABqVO2dAjCASNCUOZI8mnw7ZzOKHmzlq6fj+cvMP+r1lO\nkyvDKHq20uXIJuIfxtrMtIN+U1EVXS/Y9AZ6EEx3FOt+YDi3xyC9zT8xSwKBgCgZ\ntroYlxYXWwYGfT5cWP5phvvvRB9kO+6iH3PxXYv5L14/jkI67Wip78YI1ZypczTB\nkxst+J/1WAl6dJ0CVcN+bVL+xWmIf39PjzbrFPcmJjJl+WGVOiwq4cpa6wr63WEx\nC+12oSdN5BO6YvHhbMF8aLPOpNqSFHSURt2CuFNJAoGBAJakEUJcM1eruVGUJNA/\nbXbq/qrWporYj5mzNstkR7v0nMacJYJMt10FpVXqZ75l5i8G8OnB07Tkg8jRxaqu\n5dukM8gFPAzpx6wbu/XFu5z9skCRnAz+CQ/M6Ry3vrXOOaV0RFMKdrStxx4R3844\n358yd/uI+jZQZB44sTa2X9u6\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-uhu5i@client-eco-shop.iam.gserviceaccount.com",
+  "client_id": "111853696533385715532",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-uhu5i%40client-eco-shop.iam.gserviceaccount.com"
+}
