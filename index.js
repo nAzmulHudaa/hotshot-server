@@ -3,11 +3,11 @@ const WooCommerceAPI = require('woocommerce-api');
 require('dotenv').config();
 const admin = require('firebase-admin');
 const key = require('./serviceKey.json');
-const { firestore } = require('firebase-admin');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000;
+
 
 
 admin.initializeApp({
@@ -24,8 +24,11 @@ const WooCommerce = new WooCommerceAPI({
     version: 'wc/v3'
 });
 
-const data = WooCommerce.getAsync('customers')
+const data = WooCommerce.getAsync('customers?per_page=20')
     .then(result => {
+        // console.log(JSON.parse(result.body))
+        // const customers = JSON.parse(result.body);
+        // console.log(customers.length);
         return JSON.parse(result.body);
     })
     .catch(err => {
@@ -33,8 +36,9 @@ const data = WooCommerce.getAsync('customers')
     });
 
 
-const customerOrders = WooCommerce.getAsync('orders')
+const customerOrders = WooCommerce.getAsync('orders?per_page=30')
     .then(result => {
+      
         return JSON.parse(result.body);
     }
     )
@@ -45,97 +49,8 @@ const customerOrders = WooCommerce.getAsync('orders')
 
 const db = admin.firestore();
 
-// only add data if there is no data in the database
 
 
-
-const printData = async () => {
-    const customers = await data;
-    
-
-    // db.collection('customers').get()
-    //     .then(snapshot => {
-    //         const newData = [];
-    //         snapshot.forEach(doc => {
-    //             newData.push(doc.data());
-    //             const ids = newData.map(customerid => customerid.id);
-    //             // console.log(ids);
-
-    //             const wooId = customers.map(customer => customer.id);
-    //             // console.log(wooId);
-
-    //             const userF_set = new Set(wooId);
-    //             const userF_set1 = new Set(ids);
-    //             const difference = new Set([...userF_set1].filter(x => !userF_set.has(x)))
-
-    //             console.log([difference].length);
-
-
-                // const newUser = customers.filter(customer =>{
-                //     console.log(customer.id);
-                // });
-                // console.log(newUser);
-                // console.log(newUser);
-                // if (newUser.length > 0) {
-                //     newUser.forEach(user => {
-                //         db.collection('customers').add(user);
-                //         console.log('new user added');
-                //     }
-                //     )
-
-                // }
-                // else {
-                //     console.log('no new data');
-                // }
-            // });
-
-        // })
-
-};
-
-printData();
-
-
-const printOrderData = async () => {
-    const orders = await customerOrders;
-    // console.log(orders[0].id);
-    db.collection('orders').get()
-        .then(snapshot => {
-            snapshot.forEach(doc => {
-                const newData = [];
-                newData.push(doc.data());
-                const ids = newData.map(orderid => orderid.id);
-                // console.log(ids);
-                // console.log(newData[0]?.id??'no data');
-                const wooId = orders.map(order => order.id);
-                // console.log(wooId);
-                const userF_set = new Set(wooId);
-                const userF_set1 = new Set(ids);
-                const difference = new Set([...userF_set1].filter(x => !userF_set.has(x)))
-
-                // console.log([...difference]);
-
-
-
-                // console.log(difference);
-                // const newUser = orders.filter(order => order.id !== orders.id);
-                // console.log(newUser);
-                // if (newUser.length > 0) {
-                //     newUser.forEach(user => {
-                //         db.collection('orders').add(newUser);
-                //         console.log('new order added');
-                //     }
-                //     )
-                // }
-                // else {
-                //     console.log('no new data');
-                // }
-            });
-
-        })
-}
-
-printOrderData();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -171,6 +86,92 @@ app.get('/api/orders', (req, res) => {
             console.log(err);
         })
 })
+
+
+
+
+const printCustomers = async () => {
+    const customers = await data;
+    const customerIds = customers.map(customer => customer.id);
+    // console.log(customerIds);
+    const dbCustomers = db.collection('customers').get()
+        .then(snapshot => {
+            let dbItems = [];
+            snapshot.forEach(doc => {
+                dbItems.push(doc.data());
+            });
+            return dbItems;
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+    const printDb = async () => {
+        const dbCustomer = await dbCustomers;
+        const dbIds = dbCustomer.map(customer => customer.id);
+        // console.log(dbIds);
+        let difference = customerIds.filter(x => !dbIds.includes(x));
+        // console.log(difference.length);
+        if (difference.length > 0) {
+            difference.forEach(id => {
+                const customer = customers.find(customer => customer.id === id);
+                db.collection('customers').add(customer)
+                    .then(() => {
+                        console.log('added');
+                    });
+            })
+        }
+        else if (difference.length === 0) {
+            console.log('No new customers');
+        }
+
+    }
+    printDb();
+}
+
+printCustomers();
+
+
+const printOrders = async () => {
+    const orders = await customerOrders;
+    const orderIds = orders.map(order => order.id);
+    console.log(orderIds);
+    const dbOrders = db.collection('orders').get()
+        .then(snapshot => {
+            let dbItems = [];
+            snapshot.forEach(doc => {
+                dbItems.push(doc.data());
+            });
+            return dbItems;
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+    const printDb = async () => {
+        const dbOrder = await dbOrders;
+        const dbIds = dbOrder.map(order => order.id);
+        // console.log(dbIds);
+        let difference = orderIds.filter(x => !dbIds.includes(x));
+        // console.log(difference);
+        if (difference.length > 0) {
+            difference.forEach(id => {
+                const order = orders.find(order => order.id === id);
+                // console.log(order);
+                db.collection('orders').add(order)
+                    .then(() => {
+                        console.log('added');
+                    });
+            })
+        }
+        else if(difference.length === 0){
+            console.log('No new orders')
+        }
+    }
+    printDb();
+}
+
+printOrders();
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
